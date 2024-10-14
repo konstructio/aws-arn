@@ -90,7 +90,7 @@ data "aws_iam_policy_document" "KubefirstListRegionaandInstanceTypes" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "kubefirst-list-regions-and-instance-type"
+  name        = "kubefirst-list-regions-and-instance-typ-${var.cluster_name}"
   description = "This policy allows to List regions and instance type"
   policy      = data.aws_iam_policy_document.KubefirstListRegionaandInstanceTypes.json
 }
