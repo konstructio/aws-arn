@@ -14,9 +14,5 @@ provider  "aws" {
 module "kubefirst-pro" {
     source          = "./modules/kubefirst-pro"
     oidc_endpoint   = var.oidc_endpoint
-}
-
-
-module "crossplane" {
-    source          = "./modules/crossplane"
+    cluster_name    = var.cluster_name  
 }

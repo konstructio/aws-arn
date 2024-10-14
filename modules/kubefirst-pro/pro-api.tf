@@ -74,9 +74,6 @@ data "aws_iam_policy_document" "KubefirstListRegionaandInstanceTypes" {
     ]
   }
 
-  statement {
-    sid = ""
-  }
 
   # Full EC2 access
   statement {
@@ -93,7 +90,7 @@ data "aws_iam_policy_document" "KubefirstListRegionaandInstanceTypes" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "kubefirst-list-regions-and-instance-type"
+  name        = "kubefirst-list-regions-and-instance-typ-${var.cluster_name}"
   description = "This policy allows to List regions and instance type"
   policy      = data.aws_iam_policy_document.KubefirstListRegionaandInstanceTypes.json
 }
@@ -107,4 +104,9 @@ resource "aws_iam_role" "kubefirst-multi-account" {
 resource "aws_iam_role_policy_attachment" "example_attachment" {
   role       = aws_iam_role.kubefirst-multi-account.name
   policy_arn = aws_iam_policy.policy.arn
+}
+
+resource "local_file" "iam_role_arn_output" {
+  filename = "${path.module}/iam_role_arn.txt" 
+  content  = aws_iam_role.kubefirst-multi-account.arn  
 }
