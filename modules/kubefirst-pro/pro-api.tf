@@ -105,3 +105,8 @@ resource "aws_iam_role_policy_attachment" "example_attachment" {
   role       = aws_iam_role.kubefirst-multi-account.name
   policy_arn = aws_iam_policy.policy.arn
 }
+
+resource "local_file" "iam_role_arn_output" {
+  filename = "${path.module}/iam_role_arn.txt" 
+  content  = aws_iam_role.kubefirst-multi-account.arn  
+}
