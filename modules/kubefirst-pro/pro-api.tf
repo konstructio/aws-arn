@@ -38,6 +38,12 @@ data "aws_iam_policy_document" "KubefirstTrustRelationship" {
       variable = "${var.oidc_endpoint}:sub"
       values   = ["system:serviceaccount:kubefirst:kubefirst-kubefirst-pro-api"]
     }
+
+    condition {
+      test     = "StringLike"
+      variable = "${var.oidc_endpoint}:sub"
+      values   = ["system:serviceaccount:crossplane-system:crossplane-provider-terraform-${var.cluster_name}"]
+    }
   }
 }
 
@@ -67,6 +73,23 @@ data "aws_iam_policy_document" "KubefirstListRegionaandInstanceTypes" {
       "*",
     ]
   }
+
+  statement {
+    sid = ""
+  }
+
+  # Full EC2 access
+  statement {
+    sid    = "FullEC2Access"
+    effect = "Allow"
+    actions = [
+      "ec2:*"
+    ]
+    resources = [
+      "*"
+    ]
+  }
+
 }
 
 resource "aws_iam_policy" "policy" {
@@ -76,7 +99,7 @@ resource "aws_iam_policy" "policy" {
 }
 
 resource "aws_iam_role" "kubefirst-multi-account" {
-  name               = "kubefirst-pro-api-cluster-name"
+  name               = "kubefirst-pro-api-${var.cluster_name}"
   assume_role_policy = data.aws_iam_policy_document.KubefirstTrustRelationship.json
 
 }
