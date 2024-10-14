@@ -74,9 +74,6 @@ data "aws_iam_policy_document" "KubefirstListRegionaandInstanceTypes" {
     ]
   }
 
-  statement {
-    sid = ""
-  }
 
   # Full EC2 access
   statement {
