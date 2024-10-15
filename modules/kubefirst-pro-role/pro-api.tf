@@ -3,7 +3,7 @@
 # TODO: remove crossplane trust relationship 
 data "aws_iam_policy_document" "kubefirst_trust_relationship" {
   statement {
-    sid = "kubefirst-trust-relationship"
+    sid = "KubefirstTrustRelationship"
 
     effect = "Allow"
 
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "kubefirst_trust_relationship" {
   }
 
   statement {
-    sid = "crossplane-trust-relationship"
+    sid = "CrossplaneTrustRelationship"
 
     effect = "Allow"
 
@@ -103,7 +103,7 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
 resource "aws_iam_policy" "kubefirst_pro_api" {
   name        = "kubefirst-list-regions-and-instance-types-${var.mgmt_cluster_name}"
   description = "List regions and instance types in the account"
-  policy      = data.aws_iam_policy_document.KubefirstListRegionaandInstanceTypes.json
+  policy      = data.aws_iam_policy_document.kubefirst_list_region_and_instance_types.json
 }
 
 resource "aws_iam_role" "kubefirst_pro_api" {
@@ -113,11 +113,7 @@ resource "aws_iam_role" "kubefirst_pro_api" {
 }
 
 resource "aws_iam_role_policy_attachment" "kubefirst_pro_api" {
-  role       = aws_iam_role.kubefirst-multi-account.name
+  role       = aws_iam_role.kubefirst_pro_api.name
   policy_arn = aws_iam_policy.kubefirst_pro_api.arn
 }
 
-resource "local_file" "iam_role_arn_output" {
-  filename = "${path.module}/iam_role_arn.txt"
-  content  = aws_iam_role.kubefirst_pro_api.arn
-}
