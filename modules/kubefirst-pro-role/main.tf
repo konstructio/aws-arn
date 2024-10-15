@@ -1,7 +1,7 @@
 # TODO
 # - separate roles for kubefirst and crossplane
 
-data "tls_certificate" "oidc_thumprint" {
+data "tls_certificate" "oidc_provider" {
   url = var.oidc_endpoint
 }
 
@@ -13,5 +13,5 @@ resource "aws_iam_openid_connect_provider" "kubefirst_mgmt" {
     "sts.amazonaws.com",
   ]
 
-  thumbprint_list = [data.tls_certificate.oidc_thumprint.certificates[0].sha1_fingerprint]
+  thumbprint_list = [data.tls_certificate.oidc_provider.certificates[0].sha1_fingerprint]
 }

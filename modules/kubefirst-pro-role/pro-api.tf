@@ -18,13 +18,13 @@ data "aws_iam_policy_document" "kubefirst_trust_relationship" {
 
     condition {
       test     = "StringLike"
-      variable = "${var.oidc_endpoint}:aud"
+      variable = replace("${data.tls_certificate.oidc_provider.url}:aud", "https://", "")
       values   = ["sts.amazonaws.com"]
     }
 
     condition {
       test     = "StringLike"
-      variable = "${var.oidc_endpoint}:sub"
+      variable = replace("${data.tls_certificate.oidc_provider.url}:sub", "https://", "")
       values   = ["system:serviceaccount:kubefirst:kubefirst-kubefirst-pro-api"]
     }
   }
@@ -45,12 +45,12 @@ data "aws_iam_policy_document" "kubefirst_trust_relationship" {
 
     condition {
       test     = "StringLike"
-      variable = "${var.oidc_endpoint}:aud"
+      variable = replace("${data.tls_certificate.oidc_provider.url}:aud", "https://", "")
       values   = ["sts.amazonaws.com"]
     }
     condition {
       test     = "StringLike"
-      variable = "${var.oidc_endpoint}:sub"
+      variable = replace("${data.tls_certificate.oidc_provider.url}:sub", "https://", "")
       values   = ["system:serviceaccount:crossplane:crossplane-provider-terraform-${var.mgmt_cluster_name}"]
     }
   }
