@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "kubefirst_trust_relationship" {
     condition {
       test     = "StringLike"
       variable = replace("${data.tls_certificate.oidc_provider.url}:sub", "https://", "")
-      values   = ["system:serviceaccount:crossplane:crossplane-provider-terraform-${var.mgmt_cluster_name}"]
+      values   = ["system:serviceaccount:crossplane-system:crossplane-provider-terraform-${var.mgmt_cluster_name}"]
     }
   }
 }
@@ -88,10 +88,11 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
   # Full EC2 access (required for crossplane)
   # TODO: narrow down premission required for crossplane
   statement {
-    sid    = "FullEC2Access"
+    sid    = "AdminAccess"
     effect = "Allow"
     actions = [
-      "ec2:*"
+      "ec2:*",
+      "eks:*"
     ]
     resources = [
       "*"
