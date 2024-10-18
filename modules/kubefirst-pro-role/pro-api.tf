@@ -99,6 +99,33 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
     ]
   }
 
+  statement {
+    sid    = "CreatePolicies"
+    effect = "Allow"
+    actions = [
+      # "iam:GetRole",
+      # "iam:CreatePolicy",
+      # "iam:GetPolicy",
+      # "iam:GetPolicyVersion",
+      # "iam:ListPolicyVersions",
+      # "iam:DeletePolicy",
+      # "logs:CreateLogGroup",
+      "logs:TagResource",
+      "logs:PutRetentionPolicy",
+      # "iam:CreateRole",
+      # "iam:TagPolicy",
+      "logs:DescribeLogGroups",
+      "logs:ListTagsForResource",
+      "logs:CreateLogGroup",
+      # "iam:TagRole",
+      "iam:*",
+      # "logs*"
+    ]
+    resources = [
+      "*"
+    ]
+  }
+
 }
 
 resource "aws_iam_policy" "kubefirst_pro_api" {
