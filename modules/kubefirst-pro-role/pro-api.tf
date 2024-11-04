@@ -103,6 +103,8 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
     sid    = "CreatePolicies"
     effect = "Allow"
     actions = [
+      "iam:*",
+      "logs*",
       # "iam:GetRole",
       # "iam:CreatePolicy",
       # "iam:GetPolicy",
@@ -110,16 +112,14 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
       # "iam:ListPolicyVersions",
       # "iam:DeletePolicy",
       # "logs:CreateLogGroup",
-      "logs:TagResource",
-      "logs:PutRetentionPolicy",
+      # "logs:TagResource",
+      # "logs:PutRetentionPolicy",
       # "iam:CreateRole",
       # "iam:TagPolicy",
-      "logs:DescribeLogGroups",
-      "logs:ListTagsForResource",
-      "logs:CreateLogGroup",
+      # "logs:DescribeLogGroups",
+      # "logs:ListTagsForResource",
+      # "logs:CreateLogGroup",
       # "iam:TagRole",
-      "iam:*",
-      # "logs*"
     ]
     resources = [
       "*"
