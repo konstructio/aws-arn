@@ -104,7 +104,7 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
     effect = "Allow"
     actions = [
       "iam:*",
-      "logs*",
+      "logs:*",
       # "iam:GetRole",
       # "iam:CreatePolicy",
       # "iam:GetPolicy",
