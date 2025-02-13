@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "kubefirst_trust_relationship" {
     condition {
       test     = "StringLike"
       variable = replace("${data.tls_certificate.oidc_provider.url}:sub", "https://", "")
-      values   = ["system:serviceaccount:kubefirst:kubefirst-kubefirst-pro-api"]
+      values   = ["system:serviceaccount:kubefirst:kubefirst-pro-api"]
     }
   }
 
@@ -85,6 +85,7 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
     ]
   }
 
+  
   # Full EC2 access (required for crossplane)
   # TODO: narrow down premission required for crossplane
   statement {
@@ -105,6 +106,7 @@ data "aws_iam_policy_document" "kubefirst_list_region_and_instance_types" {
     actions = [
       "iam:*",
       "logs:*",
+      "ssm:*"
       # "iam:GetRole",
       # "iam:CreatePolicy",
       # "iam:GetPolicy",
