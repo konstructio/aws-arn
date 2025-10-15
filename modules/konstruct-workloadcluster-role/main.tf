@@ -1,13 +1,10 @@
-# TODO
-# - separate roles for kubefirst and crossplane
-
 data "tls_certificate" "oidc_provider" {
-  url = var.oidc_endpoint
+  url = var.team_cluster_oidc_endpoint
 }
 
-resource "aws_iam_openid_connect_provider" "kubefirst_mgmt" {
+resource "aws_iam_openid_connect_provider" "konstruct_business_mgmt" {
 
-  url = var.oidc_endpoint
+  url = var.team_cluster_oidc_endpoint
 
   client_id_list = [
     "sts.amazonaws.com",

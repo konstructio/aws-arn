@@ -1,9 +1,9 @@
-variable "oidc_endpoint" {
+variable "kubefirst_mgmt_cluster_oidc_endpoint" {
   type        = string
   description = "Kubefirst managment cluster's OIDC endpoint"
 }
 
-variable "mgmt_cluster_name" {
+variable "kubefirst_mgmt_cluster_name" {
   type        = string
   description = "Kubefirst managment cluster name"
 }
